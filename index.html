@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dark Finance Tracker | Designed by Piyush</title>
+
+  <!-- Open Graph Meta for LinkedIn -->
+  <meta property="og:title" content="Dark Finance Tracker | Designed by Piyush" />
+  <meta property="og:description" content="A sleek dark-themed finance tracker dashboard UI built with HTML, CSS, and JS. Designed by Piyush Joshi." />
+  <meta property="og:image" content="https://piyush2707.github.io/finance-tracker/preview.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://piyush2707.github.io/finance-tracker/" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #0f1117;
+      color: #f0f0f0;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #4fc3f7;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #1c1e26;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #81d4fa;
+    }
+
+    .amount {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .add-expense {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    input {
+      width: 150px;
+    }
+
+    button {
+      background-color: #4fc3f7;
+      color: #000;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background-color: #03a9f4;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    footer span {
+      color: #4fc3f7;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Finance Tracker Dashboard</h1>
+    <p>Track your daily balance, income & expenses</p>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h3>Total Balance</h3>
+      <p class="amount" id="balance">₹0</p>
+    </div>
+    <div class="card">
+      <h3>Total Income</h3>
+      <p class="amount" id="income">₹0</p>
+    </div>
+    <div class="card">
+      <h3>Total Expenses</h3>
+      <p class="amount" id="expense">₹0</p>
+    </div>
+  </div>
+
+  <div class="add-expense">
+    <input type="number" id="amount" placeholder="Enter Amount" />
+    <select id="type">
+      <option value="income">Income</option>
+      <option value="expense">Expense</option>
+    </select>
+    <button onclick="addTransaction()">Add</button>
+  </div>
+
+  <footer>
+    Designed by <span>Piyush</span> | <a href="https://www.linkedin.com/in/piyush2707/" target="_blank" style="color:#81d4fa;">LinkedIn</a>
+  </footer>
+
+  <script>
+    let balance = 0;
+    let income = 0;
+    let expense = 0;
+
+    function addTransaction() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      const type = document.getElementById("type").value;
+
+      if (isNaN(amount) || amount <= 0) return alert("Enter a valid amount!");
+
+      if (type === "income") {
+        income += amount;
+        balance += amount;
+      } else {
+        expense += amount;
+        balance -= amount;
+      }
+
+      updateUI();
+    }
+
+    function updateUI() {
+      document.getElementById("balance").innerText = `₹${balance}`;
+      document.getElementById("income").innerText = `₹${income}`;
+      document.getElementById("expense").innerText = `₹${expense}`;
+      document.getElementById("amount").value = "";
+    }
+  </script>
+
+</body>
+</html>
